@@ -5,7 +5,7 @@ class Data(object):
         self.type = None
         self.value = None
         self.connections = None
-        self.context = None
+        self.context = []
 
     def assignType(self, definition):
         self.type = definition
@@ -15,3 +15,16 @@ class Data(object):
 
     def getValue(self):
         return self.value
+
+    def addContext(self, point, details):
+        self.context.append(Context(point, details))
+
+    def getContext(self):
+        return self.context
+
+
+class Context(object):
+
+    def __init__(self, f, b):
+        self.focus = f
+        self.background = b
