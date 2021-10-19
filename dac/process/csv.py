@@ -16,7 +16,7 @@ class Csv(Resource):
         self.in_obj = in_obj
 
     def read(self):
-        pass
+        return self.data
 
     def extract(self):
         try:
@@ -27,8 +27,7 @@ class Csv(Resource):
                         d = Data()
                         d.assignType(int)
                         d.setValue(column)
-                    self.data.append(d)
-        except:
+                        self.data.append(d)
+        except BaseException:
             raise Exception('Please use `addInput` to define the input csv '
                             'file first.')
-

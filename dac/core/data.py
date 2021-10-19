@@ -5,6 +5,7 @@ class Data(object):
         self.type = None
         self.value = None
         self.connections = None
+        self.context = None
 
     def assignType(self, definition):
         self.type = definition
@@ -14,5 +15,3 @@ class Data(object):
 
     def getValue(self):
         return self.value
-
-
