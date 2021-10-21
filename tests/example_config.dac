@@ -2,3 +2,9 @@
 	input = "test.csv"
 	has_header = true
 }
+----
+
+"csv_resource" "test_no_header" {
+	input = "test_no_header.csv"
+	has_header = false
+}
