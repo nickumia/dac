@@ -31,6 +31,7 @@ class Csv(Resource):
                     if i == 0:
                         if self.has_header:
                             self.attributes = self.inspect_header(row)
+                            continue
                         else:
                             self.attributes = {i: i for i in range(len(row))}
                     e = Data()
