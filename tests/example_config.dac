@@ -1,0 +1,4 @@
+"csv_resource" "test" {
+	input = "test.csv"
+	has_header = true
+}

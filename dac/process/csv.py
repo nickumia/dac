@@ -21,7 +21,7 @@ class Csv(Resource):
         self.in_obj = in_obj
 
     def read(self):
-        return self.data
+        return self.data, self.records, self.attributes
 
     def extract(self):
         try:
