@@ -10,12 +10,12 @@ class CSVResource(Internal):
             'has_header' : kwargs['has_header'],
 
         }
-        self.populate_data()
         self.data = {
             'records'    : None,
             'points'     : None,
             'attributes' : None
         }
+        self.populate_data()
 
     def populate_data(self):
         a = Csv()
@@ -25,5 +25,5 @@ class CSVResource(Internal):
 
         data, records, attributes = a.read()
         self.data['records'] = records
-        self.data['points'] = points
+        self.data['points'] = data
         self.data['attributes'] = attributes

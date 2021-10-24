@@ -1,13 +1,15 @@
 import re
 
-from dac.configure.csv import CSVResource
-
 
 class Parser(object):
 
-    def __init__(self, raw):
+    def __init__(self, raw=None):
         self.raw = raw
         self.blocks = {}
+
+    def addFile(self, afile):
+        with open(afile, 'r') as config:
+            self.raw = config.read()
 
     def isolate(self, multiple):
         return multiple.split('\n----\n\n')
@@ -24,7 +26,7 @@ class Parser(object):
                     try:
                         key,value = block.split(' = ')
                         key = ''.join(key.split())
-                        value = ''.join(value.split())
+                        value = ''.join(value.split()).replace('\"', '')
                         block_data[key] = value
                     except BaseException:
                         # Probably just the start/end {}

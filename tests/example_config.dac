@@ -1,10 +1,10 @@
 "csv_resource" "test" {
-	input = "test.csv"
+	input = "/app/tests/test.csv"
 	has_header = true
 }
 ----
 
 "csv_resource" "test_no_header" {
-	input = "test_no_header.csv"
+	input = "/app/tests/test_no_header.csv"
 	has_header = false
 }
