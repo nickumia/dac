@@ -15,7 +15,8 @@ class Parser(object):
         return multiple.split('\n----\n\n')
 
     def parse(self):
-        structure = '(?P<resource>\".*\") (?P<name>\".*\") (?P<data>{[\\s\\S]+})'
+        structure = ('(?P<resource>\".*\") (?P<name>\".*\") '
+                     '(?P<data>{[\\s\\S]+})')
         pass_0 = self.isolate(self.raw)
         for element in pass_0:
             pass_1 = re.search(structure, element)
@@ -24,7 +25,7 @@ class Parser(object):
                 block_data_list = pass_1.group('data').split('\n')
                 for block in block_data_list:
                     try:
-                        key,value = block.split(' = ')
+                        key, value = block.split(' = ')
                         key = ''.join(key.split())
                         value = ''.join(value.split()).replace('\"', '')
                         block_data[key] = value
@@ -33,7 +34,7 @@ class Parser(object):
                         pass
 
                 self.blocks[pass_1.group('name').replace('\"', '')] = {
-                    'resource' : pass_1.group('resource').replace('\"', ''),
-                    'data' : block_data
+                    'resource': pass_1.group('resource').replace('\"', ''),
+                    'data': block_data
                 }
         return self.blocks

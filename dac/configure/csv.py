@@ -2,18 +2,19 @@
 from dac.configure.code import Internal
 from dac.process.csv import Csv
 
+
 class CSVResource(Internal):
 
     def __init__(self, **kwargs):
         self.resources = {
-            'input'      : kwargs['input'],
-            'has_header' : kwargs['has_header'],
+            'input':      kwargs['input'],
+            'has_header': kwargs['has_header'],
 
         }
         self.data = {
-            'records'    : None,
-            'points'     : None,
-            'attributes' : None
+            'records':    None,
+            'points':     None,
+            'attributes': None
         }
         self.populate_data()
 

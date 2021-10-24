@@ -1,5 +1,4 @@
 import os
-import pytest
 
 from dac.configure.parser import Parser
 

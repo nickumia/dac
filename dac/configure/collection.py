@@ -2,6 +2,7 @@
 from dac.configure.csv import CSVResource
 from dac.configure.parser import Parser
 
+
 class Collection(object):
 
     def __init__(self):
@@ -14,7 +15,7 @@ class Collection(object):
         self.inputs = self.parser.parse()
 
     def mutate(self):
-        for name,inp in self.inputs.items():
+        for name, inp in self.inputs.items():
             if inp['resource'] == 'csv_resource':
                 self.memory[name] = CSVResource(**inp['data'])
 
