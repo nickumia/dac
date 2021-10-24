@@ -2,6 +2,7 @@ import csv
 
 from dac.process.general import Resource
 from dac.core.data import Data
+from dac.core.types import assume_type
 
 
 class Csv(Resource):
@@ -35,15 +36,18 @@ class Csv(Resource):
                         else:
                             self.attributes = {i: i for i in range(len(row))}
                     e = Data()
-                    e.assignType(list)
-                    e.setValue(row)
+                    data_type = assume_type(row)
+                    row_typed = [assume_type(i)(i) for i in row]
+                    e.assignType(data_type)
+                    e.setValue(data_type(row_typed))
                     self.records.append(e)
 
                     for j, column in enumerate(row):
                         d = Data()
-                        d.assignType(int)
-                        d.setValue(column)
-                        d.addContext(column, self.attributes[j])
+                        data_type = assume_type(column)
+                        d.assignType(data_type)
+                        d.setValue(data_type(column))
+                        d.addContext(data_type(column), self.attributes[j])
                         self.data.append(d)
         except BaseException:
             raise Exception('Please use `addInput` to define the input csv '

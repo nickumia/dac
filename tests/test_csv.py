@@ -27,3 +27,11 @@ def test_csv_process_no_file():
     a = Csv()
     with pytest.raises(Exception):
         a.extract()
+
+
+def test_csv_process_no_header_record_count():
+    a = Csv()
+    a.addInput(filepath+'test_no_header.csv')
+    a.extract()
+
+    assert len(a.records) == 3

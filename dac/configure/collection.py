@@ -23,7 +23,7 @@ class Collection(object):
         return self.memory
 
     def mergeRows(self, first, second):
-        obj_1 = self.inputs[first]
-        obj_2 = self.inputs[second]
+        obj_1 = self.memory[first]
+        obj_2 = self.memory[second]
 
-        return obj_1.get_rows() + obj_2.get_rows()
+        return obj_1.getRows() + obj_2.getRows()
