@@ -8,3 +8,9 @@
 	input = "/app/tests/test_no_header.csv"
 	has_header = false
 }
+----
+
+"csv_resource" "test_equal" {
+	input = "/app/tests/test_equal_rows.csv"
+	has_header = true
+}

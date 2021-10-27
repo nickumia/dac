@@ -20,8 +20,8 @@ class CSVResource(Internal):
 
     def populate_data(self):
         a = Csv()
-        a.has_header = (lambda x: 1 if x == 'true' else 0) \
-                        (self.resources['has_header'])
+        a.has_header = (lambda x: 1 if x == 'true' else 0)\
+                       (self.resources['has_header'])
         a.addInput(self.resources['input'])
         a.extract()
 
@@ -32,3 +32,9 @@ class CSVResource(Internal):
 
     def getRows(self):
         return self.data['records']
+
+    def getAttributes(self):
+        return self.data['attributes']
+
+    def getData(self):
+        return self.data['points']

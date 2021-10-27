@@ -4,6 +4,7 @@ def isInt(prospect):
         return True
     return False
 
+
 def isBool(prospect):
     if type(prospect) == str:
         if prospect == 'true':
@@ -14,15 +15,18 @@ def isBool(prospect):
         return True
     return False
 
+
 def isList(prospect):
     if type(prospect) == list:
         return True
     return False
 
+
 def isString(prospect):
     if type(prospect) == str:
         return True
     return False
+
 
 def assume_type(inp):
     if isInt(inp):
@@ -37,4 +41,6 @@ def assume_type(inp):
     except ValueError:
         pass
 
+    if isString(inp):
+        return str
     return str

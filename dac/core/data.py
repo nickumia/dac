@@ -10,6 +10,9 @@ class Data(object):
     def assignType(self, definition):
         self.type = definition
 
+    def readType(self):
+        return self.type
+
     def setValue(self, value):
         self.value = value
 
