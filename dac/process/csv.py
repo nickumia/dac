@@ -2,7 +2,7 @@ import csv
 
 from dac.process.general import Resource
 from dac.core.data import Data
-from dac.core.types import assume_type
+from dac.core.types import assume_type, convert_type
 
 
 class Csv(Resource):
@@ -37,28 +37,31 @@ class Csv(Resource):
                             self.attributes = {i: i for i in range(len(row))}
                     e = Data()
                     data_type = assume_type(row)
-                    row_typed = [assume_type(i)(i) for i in row]
+                    row_typed = []
+                    for k in row:
+                        assumed = assume_type(k)
+                        row_typed.append(convert_type(assumed, k))
                     e.assignType(data_type)
-                    e.setValue(data_type(row_typed))
+                    e.setValue(convert_type(data_type, row_typed))
                     self.records.append(e)
 
                     for j, column in enumerate(row):
                         d = Data()
                         data_type = assume_type(column)
                         d.assignType(data_type)
-                        d.setValue(data_type(column))
-                        d.addContext(data_type(column), self.attributes[j])
+                        d.setValue(convert_type(data_type, column))
+                        d.addContext(convert_type(data_type, column), self.attributes[j])
                         if self.has_header:
-                            d.addContext(data_type(column), self.records[i-1])
+                            d.addContext(convert_type(data_type, column), self.records[i-1])
                         else:
-                            d.addContext(data_type(column), self.records[i])
+                            d.addContext(convert_type(data_type, column), self.records[i])
                         if len(self.data) == 0:
-                            d.addContext(data_type(column), 0)
+                            d.addContext(convert_type(data_type, column), 0)
                         else:
                             if self.has_header:
-                                d.addContext(data_type(column),self.data[((i-1)*len(self.attributes))+j-1]) # NOQA
+                                d.addContext(convert_type(data_type,column),self.data[((i-1)*len(self.attributes))+j-1]) # NOQA
                             else:
-                                d.addContext(data_type(column),self.data[(i*len(self.attributes))+j-1]) # NOQA
+                                d.addContext(convert_type(data_type, column),self.data[(i*len(self.attributes))+j-1]) # NOQA
                         self.data.append(d)
         except BaseException:
             raise Exception('Please use `addInput` to define the input csv '

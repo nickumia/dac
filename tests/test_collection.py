@@ -11,14 +11,14 @@ def test_configure_collection_two_csv_load():
     a.add(filepath+'example_config.dac')
     a.mutate()
     results = a.read()
-    assert len(results) == 3
+    assert len(results) == 4
 
 
 def test_configure_collection_two_csv_merge():
     a = Collection()
     a.add(filepath+'example_config.dac')
     a.mutate()
-    results = a.mergeRows('test', 'test_no_header')
+    results = a.mergeRows('csv_resource.test', 'csv_resource.test_no_header')
     assert len(results) == 8
     a1 = Data()
     a1.assignType(list)
@@ -34,7 +34,7 @@ def test_configure_collection_two_csv_merge_impartial():
     a = Collection()
     a.add(filepath+'example_config.dac')
     a.mutate()
-    results = a.mergeRows('test', 'test_no_header', impartial=True)
+    results = a.mergeRows('csv_resource.test', 'csv_resource.test_no_header', impartial=True)
     assert len(results) == 8
     a1 = Data()
     a1.assignType(list)
@@ -50,7 +50,7 @@ def test_configure_collection_two_equal_csv_merge():
     a = Collection()
     a.add(filepath+'example_config.dac')
     a.mutate()
-    results = a.mergeRows('test', 'test_equal')
+    results = a.mergeRows('csv_resource.test', 'csv_resource.test_equal')
     assert len(results) == 9
     a1 = Data()
     a1.assignType(list)
@@ -61,6 +61,13 @@ def test_configure_collection_two_equal_csv_merge():
     assert_data_equal(results[0], a1)
     assert_data_equal(results[8], b1)
 
+
+def test_configure_collection_merge_combo1():
+    a = Collection()
+    a.add(filepath+'example_config.dac')
+    a.mutate()
+
+    assert 'merge_rows.combo1' in a.memory
 
 def assert_data_equal(obj1, obj2):
     obj1_type = obj1.type

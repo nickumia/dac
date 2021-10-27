@@ -1,5 +1,6 @@
 import re
 
+from dac.core.types import assume_type, convert_type
 
 class Parser(object):
 
@@ -28,13 +29,16 @@ class Parser(object):
                         key, value = block.split(' = ')
                         key = ''.join(key.split())
                         value = ''.join(value.split()).replace('\"', '')
-                        block_data[key] = value
+                        value_type = assume_type(value)
+                        block_data[key] = convert_type(value_type, value)
                     except BaseException:
                         # Probably just the start/end {}
                         pass
 
-                self.blocks[pass_1.group('name').replace('\"', '')] = {
-                    'resource': pass_1.group('resource').replace('\"', ''),
+                name_id = pass_1.group('name').replace('\"', '')
+                resource = pass_1.group('resource').replace('\"', '')
+                self.blocks['%s.%s' % (resource, name_id)] = {
+                    'resource': resource,
                     'data': block_data
                 }
         return self.blocks

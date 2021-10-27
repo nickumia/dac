@@ -44,3 +44,13 @@ def assume_type(inp):
     if isString(inp):
         return str
     return str
+
+def convert_type(desired, value):
+    if desired == bool:
+        if value == 'true':
+            return True
+        if value == 'false':
+            return False
+        return bool(value)
+
+    return desired(value)

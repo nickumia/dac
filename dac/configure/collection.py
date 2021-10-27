@@ -19,6 +19,11 @@ class Collection(object):
         for name, inp in self.inputs.items():
             if inp['resource'] == 'csv_resource':
                 self.memory[name] = CSVResource(**inp['data'])
+            if inp['resource'] == 'merge_rows':
+                first = inp['data']['first']
+                second = inp['data']['second']
+                impartial = inp['data']['impartial']
+                self.memory[name] = self.mergeRows(first, second, impartial=impartial)
 
     def read(self):
         return self.memory

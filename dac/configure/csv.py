@@ -20,8 +20,7 @@ class CSVResource(Internal):
 
     def populate_data(self):
         a = Csv()
-        a.has_header = (lambda x: 1 if x == 'true' else 0)\
-                       (self.resources['has_header'])
+        a.has_header = self.resources['has_header']
         a.addInput(self.resources['input'])
         a.extract()
 

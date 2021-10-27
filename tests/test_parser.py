@@ -10,8 +10,10 @@ def test_configure_parser():
     with open(filepath+'example_config.dac', 'r') as config:
         a = Parser(config.read())
     results = a.parse()
-    assert len(results) == 3
-    assert len(results['test']) == 2
-    assert results['test']['data']['has_header'] == 'true'
-    assert len(results['test_no_header']) == 2
-    assert results['test_no_header']['data']['has_header'] == 'false'
+    name_id = 'csv_resource.test'
+    name_id2 = 'csv_resource.test_no_header'
+    assert len(results) == 4
+    assert len(results[name_id]) == 2
+    assert results[name_id]['data']['has_header'] == True
+    assert len(results[name_id2]) == 2
+    assert results[name_id2]['data']['has_header'] == False
