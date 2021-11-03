@@ -15,6 +15,7 @@ def test_configure_collection_merge_combo1():
     results = a.memory['merge_columns.combo1']
     assert len(results) == 5
 
+
 def test_configure_collection_merge_combo2():
     a = Collection()
     a.add(filepath+'merge_columns.dac')
