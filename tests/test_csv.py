@@ -76,3 +76,14 @@ def assert_data_equal(obj1, obj2):
         assert obj1_context == obj2_context
     except AssertionError:
         assert_context_equal(obj1_context, obj2_context)
+
+
+def assert_context_equal(con1, con2):
+    con1_focus = con1.focus
+    con1_background = con1.background
+
+    con2_focus = con2.focus
+    con2_background = con2.background
+
+    assert con1_focus == con2_focus
+    assert con1_background == con2_background

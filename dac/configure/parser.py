@@ -2,6 +2,7 @@ import re
 
 from dac.core.types import assume_type, convert_type
 
+
 class Parser(object):
 
     def __init__(self, raw=None):

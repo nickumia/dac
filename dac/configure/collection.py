@@ -1,5 +1,5 @@
 
-from dac.configure.csv import CSVResource, merge_records
+from dac.configure.csv import CSVResource, merge_records, merge_attributes
 from dac.configure.parser import Parser
 
 
@@ -22,7 +22,13 @@ class Collection(object):
                 first = inp['data']['first']
                 second = inp['data']['second']
                 impartial = inp['data']['impartial']
-                self.memory[name] = self.mergeRows(first, second, impartial=impartial)
+                self.memory[name] = self.mergeRows(first, second, impartial=impartial)  # NOQA E501
+            if inp['resource'] == 'merge_columns':
+                first = inp['data']['first']
+                second = inp['data']['second']
+                attribs = inp['data']['attributes'].split(',')
+                data = inp['data']['data_only']
+                self.memory[name] = self.mergeColumns(first, second, attribs, data=data)  # NOQA E501
 
     def read(self):
         return self.memory
@@ -33,3 +39,10 @@ class Collection(object):
 
         if isinstance(obj_1, CSVResource) and isinstance(obj_2, CSVResource):
             return merge_records(obj_1, obj_2, impartial=impartial)
+
+    def mergeColumns(self,first, second, attribs, data=False):
+        obj_1 = self.memory[first]
+        obj_2 = self.memory[second]
+
+        if isinstance(obj_1, CSVResource) and isinstance(obj_2, CSVResource):
+            return merge_attributes(obj_1, obj_2, attribs, data=data)

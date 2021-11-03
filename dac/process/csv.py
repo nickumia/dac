@@ -50,18 +50,18 @@ class Csv(Resource):
                         data_type = assume_type(column)
                         d.assignType(data_type)
                         d.setValue(convert_type(data_type, column))
-                        d.addContext(convert_type(data_type, column), self.attributes[j])
+                        d.addContext(convert_type(data_type, column), self.attributes[j])  # NOQA E501
                         if self.has_header:
-                            d.addContext(convert_type(data_type, column), self.records[i-1])
+                            d.addContext(convert_type(data_type, column), self.records[i-1])  # NOQA E501
                         else:
-                            d.addContext(convert_type(data_type, column), self.records[i])
+                            d.addContext(convert_type(data_type, column), self.records[i])  # NOQA E501
                         if len(self.data) == 0:
                             d.addContext(convert_type(data_type, column), 0)
                         else:
                             if self.has_header:
-                                d.addContext(convert_type(data_type,column),self.data[((i-1)*len(self.attributes))+j-1]) # NOQA
+                                d.addContext(convert_type(data_type,column),self.data[((i-1)*len(self.attributes))+j-1])  # NOQA E501
                             else:
-                                d.addContext(convert_type(data_type, column),self.data[(i*len(self.attributes))+j-1]) # NOQA
+                                d.addContext(convert_type(data_type, column),self.data[(i*len(self.attributes))+j-1])  # NOQA E501
                         self.data.append(d)
         except BaseException:
             raise Exception('Please use `addInput` to define the input csv '

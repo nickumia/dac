@@ -54,7 +54,7 @@ def merge_records(obj_1, obj_2, impartial=False):
             new_row = Data()
             new_row.assignType(row.readType())
             new_row_value = row.getValue()
-            for key,attrib in obj_2_attributes.items():
+            for key, attrib in obj_2_attributes.items():
                 if attrib not in obj_1_attributes.values():
                     new_row_value.append(None)
             new_row.setValue(new_row_value)
@@ -64,10 +64,40 @@ def merge_records(obj_1, obj_2, impartial=False):
             new_row = Data()
             new_row.assignType(row.readType())
             new_row_value = row.getValue()
-            for key,attrib in obj_1_attributes.items():
+            for key, attrib in obj_1_attributes.items():
                 if attrib not in obj_2_attributes:
                     new_row_value.insert(0, None)
             new_row.setValue(new_row_value)
             new_rows.append(new_row)
 
         return new_rows
+
+
+def merge_attributes(obj_1, obj_2, attribs, data=False):
+    obj_1_attributes = obj_1.getAttributes()
+    obj_2_attributes = obj_2.getAttributes()
+    obj_1_points = obj_1.getData()
+    obj_2_points = obj_2.getData()
+
+    objs_with_attribs = []
+    for attrib in attribs:
+        for point in obj_1_points:
+            for context in point.getContext():
+                if attrib == context.background:
+                    objs_with_attribs.append(point)
+
+        for point in obj_2_points:
+            for context in point.getContext():
+                if attrib == context.background:
+                    objs_with_attribs.append(point)
+
+    if data:
+        return objs_with_attribs
+
+    new_rows = []
+    for obj in objs_with_attribs:
+        for context in obj.getContext():
+            if type(context.background) == list:
+                new_rows.append(context.background)
+
+    return new_rows

@@ -45,6 +45,7 @@ def assume_type(inp):
         return str
     return str
 
+
 def convert_type(desired, value):
     if desired == bool:
         if value == 'true':
