@@ -68,6 +68,16 @@ def test_configure_collection_merge_combo1():
     a.mutate()
 
     assert 'merge_rows.combo1' in a.memory
+    results = a.memory['merge_rows.combo1']
+    assert len(results) == 8
+    a1 = Data()
+    a1.assignType(list)
+    a1.setValue([1, 2, 1, True])
+    b1 = Data()
+    b1.assignType(list)
+    b1.setValue([7, 8, 9])
+    assert_data_equal(results[0], a1)
+    assert_data_equal(results[7], b1)
 
 def assert_data_equal(obj1, obj2):
     obj1_type = obj1.type
