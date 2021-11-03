@@ -18,7 +18,15 @@
 
 "merge_columns" "combo1" {
 	first = csv_resource.test
-	second = csv_resource.test_equal
+	second = csv_resource.test_no_header
 	attributes = odd
 	data_only = true
+}
+----
+
+i"merge_columns" "combo2" {
+	first = csv_resource.test
+	second = csv_resource.test_equal
+	attributes = odd
+	data_only = false
 }

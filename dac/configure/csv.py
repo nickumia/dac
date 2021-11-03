@@ -74,8 +74,6 @@ def merge_records(obj_1, obj_2, impartial=False):
 
 
 def merge_attributes(obj_1, obj_2, attribs, data=False):
-    obj_1_attributes = obj_1.getAttributes()
-    obj_2_attributes = obj_2.getAttributes()
     obj_1_points = obj_1.getData()
     obj_2_points = obj_2.getData()
 
@@ -97,7 +95,8 @@ def merge_attributes(obj_1, obj_2, attribs, data=False):
     new_rows = []
     for obj in objs_with_attribs:
         for context in obj.getContext():
-            if type(context.background) == list:
-                new_rows.append(context.background)
+            if type(context.background) == Data:
+                if context.background.readType() == list:
+                    new_rows.append(context.background)
 
     return new_rows

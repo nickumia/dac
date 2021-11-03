@@ -40,7 +40,7 @@ class Collection(object):
         if isinstance(obj_1, CSVResource) and isinstance(obj_2, CSVResource):
             return merge_records(obj_1, obj_2, impartial=impartial)
 
-    def mergeColumns(self,first, second, attribs, data=False):
+    def mergeColumns(self, first, second, attribs, data=False):
         obj_1 = self.memory[first]
         obj_2 = self.memory[second]
 
